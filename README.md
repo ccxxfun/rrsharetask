@@ -5,7 +5,7 @@ wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-
 chmod +x tcp.sh
 ./tcp.sh
 
-# 选择安装bbr或者bbrplus或者其他 安装完内核会要求重启。重启完成后 运行
+#选择安装bbr或者bbrplus或者其他 安装完内核会要求重启。重启完成后 运行
 ./tcp.sh
 
 
@@ -13,27 +13,27 @@ chmod +x tcp.sh
 
 wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubiBackup/doubi/master/status.sh && chmod +x status.sh
 
-# 显示客户端管理菜单
+#显示客户端管理菜单
 bash status.sh c
  
-# 显示服务端管理菜单
+#显示服务端管理菜单
 bash status.sh s
 
 
 # 3、安装人人影视
 
-# CentOS 7系统
+#CentOS 7系统
 yum install make wget crontabs -y
 
-# 下载
+#下载
 wget --no-check-certificate https://dl.ilvruan.com/rrshareweb_centos7.tar.gz
 
-# 解压CentOS 7压缩包，这里测试的Debian、Ubuntu都可以使用该包，CentOS 6的没试过
+#解压CentOS 7压缩包，这里测试的Debian、Ubuntu都可以使用该包，CentOS 6的没试过
 tar -zxvf rrshareweb_centos7.tar.gz
-# 删除无用文件
+#删除无用文件
 rm -rf rrshareweb*.tar.gz rrshareweb_linux.rar WEB*.png
 
-# 更改人人影视配置文件 修改默认端口
+#更改人人影视配置文件 修改默认端口
 vim /root/rrshareweb/
 
 {
@@ -46,18 +46,18 @@ vim /root/rrshareweb/
     "defaultsavepath" : "/root/file"
 }
 
-# CentOS 7系统 防火墙
-# 安装防火墙
+#CentOS 7系统 防火墙
+#安装防火墙
 yum install firewalld
-# 启动防火墙
+#启动防火墙
 systemctl start firewalld
-# 将端口加入防火墙
+#将端口加入防火墙
 firewall-cmd --zone=public --add-port=18888/tcp --permanent
-# 重新加载防火墙
+#重新加载防火墙
 firewall-cmd --reload
 
-# 将 人人加入 开机自启
-# 以下是一整条命令，一起复制到SSH客户端运行
+# 4、将 人人加入 开机自启
+#以下是一整条命令，一起复制到SSH客户端运行
 cat > /etc/systemd/system/renren.service <<EOF
 [Unit]
 Description=RenRen server
@@ -77,7 +77,7 @@ WantedBy=multi-user.target
 EOF
 
 
-# 4、人人影视冷门自动任务
+# 5、人人影视冷门自动任务
 yum install git -y
 git clone https://github.com/rushiwo/rrysautotask.git
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
@@ -102,15 +102,15 @@ vim /root/rrysautotask/config.json
 
 ln -s /root/.nvm/versions/node/v11.10.0/bin/node /usr/bin/node
 
-# 开始启动人人：
+# 6、开始启动人人：
 systemctl start renren
 
-# 从新加载任务
+#从新加载任务
 systemctl daemon-reload
 
-# 查看状态：
+#查看状态：
 systemctl status renren
 如果显示active(running)即开启成功。
 
-# 设置开机自启：
+#设置开机自启：
 systemctl enable renren

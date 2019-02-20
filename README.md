@@ -30,6 +30,7 @@ wget --no-check-certificate https://dl.ilvruan.com/rrshareweb_centos7.tar.gz
 
 #解压CentOS 7压缩包，这里测试的Debian、Ubuntu都可以使用该包，CentOS 6的没试过
 tar -zxvf rrshareweb_centos7.tar.gz
+
 #删除无用文件
 rm -rf rrshareweb*.tar.gz rrshareweb_linux.rar WEB*.png
 
